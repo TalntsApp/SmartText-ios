@@ -13,7 +13,7 @@ class MessageParser {
     let patterns : [(key:String, regex:String, textAtrribut:[String : NSObject])]
     let text: NSAttributedString
     
-    var parseObjects : [(key:String, range:NSRange)]
+    var parseObjects:Array<(key:String, range:NSRange)> = Array<(key:String, range:NSRange)>()
     
     var attributeDidChaged: ((attributedString : NSAttributedString) -> ())?
     
@@ -22,8 +22,6 @@ class MessageParser {
     init(text:NSAttributedString, patterns:[(key:String, regex:String, textAtrribut:[String : NSObject])]) {
         self.patterns = patterns
         self.text = text;
-        
-        self.parseObjects = [(key:String, range:NSRange)]()
     }
     
     // MARK: create
