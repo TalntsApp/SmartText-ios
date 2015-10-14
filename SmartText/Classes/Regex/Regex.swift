@@ -1,18 +1,13 @@
-//
-//  Regex.swift
-//  SearchApp
-//
-//  Created by Alex K. on 01/10/15.
-//  Copyright © 2015 Alex K. All rights reserved.
-//
 
 import Foundation
 
-class Regex {
+class Regex
+{
     let internalExpression: NSRegularExpression?
     let pattern: String
     
-    init(_ pattern: String) {
+    init(_ pattern: String)
+    {
         self.pattern = pattern
         self.internalExpression = NSRegularExpression(pattern: pattern, options: .DotMatchesLineSeparators, error:nil)
     }

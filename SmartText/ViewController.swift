@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var testLabel: UILabel!
     
-    var parser : MessageParser!
+    var parser : TextParser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,31 +25,21 @@ class ViewController: UIViewController {
         // create mail pattern
         let mailAttributes = [NSForegroundColorAttributeName: UIColor.blueColor(), NSBackgroundColorAttributeName: UIColor.yellowColor(), NSUnderlineStyleAttributeName: 1]
         let emailregex = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*"
-        let mailPattern = (key:"mail", regex:emailregex, textAtrribut:mailAttributes)
+        let mailPattern = Pattern(key:"mail", regex:emailregex, attributes:mailAttributes)
         
         // Hashtags
         let hashtagAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSBackgroundColorAttributeName: UIColor.redColor(), NSUnderlineStyleAttributeName: 1]
         let hashtagRegex = "(?<!\\w)#([\\w\\_]+)?"
-        let hashtagPattern = (key:"hashtag", regex:hashtagRegex, textAtrribut:hashtagAttributes)
+        let hashtagPattern = Pattern(key:"hashtag", regex:hashtagRegex, attributes:hashtagAttributes)
         
         // user 
         let userAttributes = [NSForegroundColorAttributeName: UIColor.blueColor(), NSBackgroundColorAttributeName: UIColor.redColor(), NSUnderlineStyleAttributeName: 1]
         let userRegex = "(?<!\\w)@([\\w\\_]+)?"
-        let userPattern = (key:"user", regex:userRegex, textAtrribut:userAttributes)
+        let userPattern = Pattern(key:"user", regex:userRegex, attributes:userAttributes)
         
         // create parser
-        parser = MessageParser(text: testLabel.attributedText!, patterns:[mailPattern, hashtagPattern, userPattern])
-
-        parser.attributeDidChaged = {(attributedString: NSAttributedString) -> () in
-            self.testLabel.attributedText = attributedString
-        }
-        
-        parser.startParse()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        parser = TextParser(text: testLabel.attributedText!, patterns:[mailPattern, hashtagPattern, userPattern])
+        self.testLabel.attributedText = parser.parse()
     }
     
     // PRAGMA: actions
@@ -71,37 +61,15 @@ class ViewController: UIViewController {
         textContainer.lineBreakMode = label.lineBreakMode;
         layoutManager.addTextContainer(textContainer)
 
-        layoutManager.characterIndexForPoint(tapLocation, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints:nil) // magic line ???
-        
-        let offset = textOffser(layoutManager, textContainer: textContainer)
-        tapLocation = CGPointMake(tapLocation.x - offset.x, tapLocation.y - offset.y)
-
-        let index = layoutManager.glyphIndexForPoint(tapLocation, inTextContainer: textContainer)
-        
+        let index = layoutManager.characterIndexForPoint(tapLocation, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints:nil)
         println("newindex: \(index)")
         
-        parser.foundParseObject(index) { (parseObject) -> Void in
-            if (parseObject != nil) {
-                println("key: \(parseObject!.key) value:\(parseObject!.value)")
-            } else {
-                println("object not found")
-            }
+        let parseObject = parser.findPattern(index)
+        if (parseObject != nil) {
+            println("key: \(parseObject!.key) value:\(parseObject!.value)")
+        } else {
+            println("object not found")
         }
-    }
-
-    // PRAGMA: helps
-    
-    func textOffser(layoutManager: NSLayoutManager, textContainer:NSTextContainer) ->CGPoint {
-        var textOffset : CGPoint = CGPointZero
-        var textBounds = layoutManager.usedRectForTextContainer(textContainer)
-        textBounds.size.width = ceil(textBounds.size.width)
-        textBounds.size.height = ceil(textBounds.size.height)
-        
-        if textBounds.size.height < self.testLabel.bounds.size.height {
-            let paddingHeight = (self.testLabel.bounds.size.height - textBounds.size.height) / 2.0
-            textOffset = CGPointMake(textOffset.x, paddingHeight)
-        }
-        return textOffset;
     }
 }
 

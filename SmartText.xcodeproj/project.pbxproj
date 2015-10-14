@@ -12,7 +12,7 @@
 		EDAC4ED11BCE8E26003A5532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC4ECF1BCE8E26003A5532 /* Main.storyboard */; };
 		EDAC4ED31BCE8E26003A5532 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDAC4ED21BCE8E26003A5532 /* Images.xcassets */; };
 		EDAC4ED61BCE8E26003A5532 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDAC4ED41BCE8E26003A5532 /* LaunchScreen.xib */; };
-		EDAC4EF11BCE8EB5003A5532 /* MessageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4EEE1BCE8EB5003A5532 /* MessageParser.swift */; };
+		EDAC4EF11BCE8EB5003A5532 /* TextParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4EEE1BCE8EB5003A5532 /* TextParser.swift */; };
 		EDAC4EF21BCE8EB5003A5532 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC4EF01BCE8EB5003A5532 /* Regex.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +26,7 @@
 		EDAC4ED51BCE8E26003A5532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EDAC4EE01BCE8E26003A5532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDAC4EE11BCE8E26003A5532 /* SmartTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartTextTests.swift; sourceTree = "<group>"; };
-		EDAC4EEE1BCE8EB5003A5532 /* MessageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageParser.swift; sourceTree = "<group>"; };
+		EDAC4EEE1BCE8EB5003A5532 /* TextParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextParser.swift; sourceTree = "<group>"; };
 		EDAC4EF01BCE8EB5003A5532 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,7 +117,7 @@
 		EDAC4EED1BCE8EB5003A5532 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				EDAC4EEE1BCE8EB5003A5532 /* MessageParser.swift */,
+				EDAC4EEE1BCE8EB5003A5532 /* TextParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -203,7 +203,7 @@
 				EDAC4ECE1BCE8E26003A5532 /* ViewController.swift in Sources */,
 				EDAC4EF21BCE8EB5003A5532 /* Regex.swift in Sources */,
 				EDAC4ECC1BCE8E26003A5532 /* AppDelegate.swift in Sources */,
-				EDAC4EF11BCE8EB5003A5532 /* MessageParser.swift in Sources */,
+				EDAC4EF11BCE8EB5003A5532 /* TextParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
