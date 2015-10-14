@@ -61,9 +61,9 @@
 		EDAC4EC81BCE8E26003A5532 /* SmartText */ = {
 			isa = PBXGroup;
 			children = (
-				EDAC4EEC1BCE8EB5003A5532 /* Classes */,
 				EDAC4ECB1BCE8E26003A5532 /* AppDelegate.swift */,
 				EDAC4ECD1BCE8E26003A5532 /* ViewController.swift */,
+				EDAC4EEC1BCE8EB5003A5532 /* Classes */,
 				EDAC4EEB1BCE8E9E003A5532 /* Resources */,
 				EDAC4EC91BCE8E26003A5532 /* Supporting Files */,
 			);
