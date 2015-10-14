@@ -78,13 +78,13 @@ class ViewController: UIViewController {
 
         let index = layoutManager.glyphIndexForPoint(tapLocation, inTextContainer: textContainer)
         
-        print("newindex: \(index)")
+        println("newindex: \(index)")
         
         parser.foundParseObject(index) { (parseObject) -> Void in
             if (parseObject != nil) {
-                print("key: \(parseObject!.key) value:\(parseObject!.value)")
+                println("key: \(parseObject!.key) value:\(parseObject!.value)")
             } else {
-                print("object not found")
+                println("object not found")
             }
         }
     }
