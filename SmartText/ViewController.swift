@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         let userPattern = Pattern(key:"user", regex:userRegex, attributes:userAttributes)
         
         // create parser
-        parser = TextParser(text: testLabel.attributedText!, patterns:[mailPattern, hashtagPattern, userPattern])
+        parser = TextParser(text: (testLabel.text ?? ""), patterns:[mailPattern, hashtagPattern, userPattern])
         self.testLabel.attributedText = parser.parse()
     }
     
@@ -65,9 +65,12 @@ class ViewController: UIViewController {
         println("newindex: \(index)")
         
         let parseObject = parser.findPattern(index)
-        if (parseObject != nil) {
-            println("key: \(parseObject!.key) value:\(parseObject!.value)")
-        } else {
+        if let patternObject = parseObject
+        {
+            println("key: \(patternObject.key) value:\(patternObject.string)")
+        }
+        else
+        {
             println("object not found")
         }
     }

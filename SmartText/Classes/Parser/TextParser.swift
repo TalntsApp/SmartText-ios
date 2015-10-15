@@ -12,29 +12,20 @@ struct PatternObject
 {
     let key:String
     let range:NSRange
+    let string:String
     let attributes:[String : NSObject]
 }
 
 class TextParser
 {
-    let patterns : [Pattern]
-    let text: NSAttributedString
+    var patterns : [Pattern] { didSet{ self.parse() } }
+    var text: String { didSet{ self.parse() } }
     var patternsObjects = [PatternObject]()
     
-    init(text:NSAttributedString, patterns:[Pattern])
+    init(text:String, patterns:[Pattern])
     {
         self.patterns = patterns
         self.text = text;
-    }
-    
-    private func addAttributes(attributedString:NSMutableAttributedString, key:String, attributes:[String : NSObject], ranges:[NSRange])
-    {
-        for range in ranges
-        {
-            attributedString.addAttributes(attributes, range:range)
-            let pattern = PatternObject(key:key, range:range, attributes:attributes)
-            patternsObjects.append(pattern)
-        }
     }
     
     func parse() -> NSAttributedString
@@ -42,34 +33,48 @@ class TextParser
         return self.parse(text, patterns: patterns)
     }
     
-    func parse(text:NSAttributedString, patterns:[Pattern]) -> NSAttributedString
+    func parse(text:String, patterns:[Pattern]) -> NSAttributedString
     {
-        let attributedString = NSMutableAttributedString(attributedString: text)
-        for pattern in patterns
-        {
-            let ranges = Regex(pattern.regex).found(text.string)
-            addAttributes(attributedString, key:pattern.key, attributes: pattern.attributes, ranges: ranges)
-        }
-        return attributedString
+        let (string,patternsObjects) = createPatternString(text, patterns)
+        self.patternsObjects = patternsObjects
+        return string
     }
     
-    func findPattern(index:Int) -> (key:String, value:String)?
+    func findPattern(index:Int) -> PatternObject?
     {
-        var seekingPattern: PatternObject? = nil
-        
-        for pattern in patternsObjects
-        {
-            if NSLocationInRange(index, pattern.range)
-            {
-                seekingPattern = pattern
-            }
-        }
-        
-        if let pattern = seekingPattern
-        {
-            let value = text.attributedSubstringFromRange(pattern.range)
-            return (key:pattern.key, value:value.string)
-        }
-        return nil
+        let po = findPatternInString(text, patternsObjects, index)
+        return po
     }
 }
+
+func createPatternString(text:String, patterns:[Pattern]) -> (NSAttributedString, [PatternObject])
+{
+    let attributedString = NSMutableAttributedString(string: text)
+    var patternsObjects = [PatternObject]()
+    for pattern in patterns
+    {
+        let ranges = Regex(pattern.regex).found(text)
+        for range in ranges
+        {
+            attributedString.addAttributes(pattern.attributes, range:range)
+            let s = (text as NSString).substringWithRange(range)
+            let p = PatternObject(key:pattern.key, range:range, string:s, attributes:pattern.attributes)
+            patternsObjects.append(p)
+        }
+    }
+    return (attributedString, patternsObjects)
+}
+
+func findPatternInString(text:String, allPatternsObjects:[PatternObject], index:Int) -> PatternObject?
+{
+    var seekingPattern: PatternObject? = nil
+    for pattern in allPatternsObjects
+    {
+        if NSLocationInRange(index, pattern.range)
+        {
+            seekingPattern = pattern
+        }
+    }
+    return seekingPattern
+}
+

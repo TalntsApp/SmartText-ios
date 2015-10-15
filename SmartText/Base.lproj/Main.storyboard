@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBS-iq-xOp">
-                                <rect key="frame" x="20" y="20" width="560" height="161"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBS-iq-xOp">
+                                <rect key="frame" x="16" y="226" width="568" height="161"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.1215686275" green="0.69411764710000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.1215686275" green="0.69411764710000001" blue="0.28235294119999998" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="161" id="0pc-Hh-gcj"/>
                                 </constraints>
@@ -33,8 +33,8 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cBS-iq-xOp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="WWH-Lu-WWB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cBS-iq-xOp" secondAttribute="trailing" id="ejG-rA-KgN"/>
+                            <constraint firstItem="cBS-iq-xOp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="206" id="jik-9S-aMQ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="cBS-iq-xOp" secondAttribute="leading" id="lmL-P8-LeK"/>
                         </constraints>
                     </view>
