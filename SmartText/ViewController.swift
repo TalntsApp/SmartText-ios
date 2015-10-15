@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         let userPattern = Pattern(key:"user", regex:userRegex, attributes:userAttributes)
         
         // create parser
-        parser = TextParser(text: (testLabel.text ?? ""), patterns:[mailPattern, hashtagPattern, userPattern])
+        parser = TextParser(text:testLabel.attributedText, patterns:[mailPattern, hashtagPattern, userPattern])
         self.testLabel.attributedText = parser.parse()
     }
     
@@ -48,9 +48,8 @@ class ViewController: UIViewController {
         let label = recognizer.view as! UILabel
         var tapLocation = recognizer.locationInView(label)
         
-        
         // init text storage
-        let textStorage: NSTextStorage = NSTextStorage(attributedString: label.attributedText!)
+        let textStorage: NSTextStorage = NSTextStorage(attributedString: label.attributedText)
         let layoutManager: NSLayoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
         
